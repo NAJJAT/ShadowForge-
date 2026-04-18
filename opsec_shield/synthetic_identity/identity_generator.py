@@ -6,16 +6,18 @@ import random
 import time
 import hashlib
 import json
+import logging          # <-- أضف هذا
 from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from faker import Faker  # pip install Faker
 
+logger = logging.getLogger(__name__)   # <-- أضف هذا
+
 # تهيئة Faker لكل اللغات
 fake_en = Faker('en_US')
 fake_ar = Faker('ar_SA')
 fake_fr = Faker('fr_FR')
-
 
 @dataclass
 class DigitalIdentity:

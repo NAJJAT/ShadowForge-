@@ -6,7 +6,7 @@ import random
 import time
 import hashlib
 import logging
-from typing import bytes, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from enum import Enum
 import json
 

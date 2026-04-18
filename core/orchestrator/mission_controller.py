@@ -19,10 +19,14 @@ from exploit_developer import ExploitBuilder, PayloadCrafter
 from backdoor_factory import WindowsPersistence, StealthImplant
 from c2_channel import BeaconProtocol
 from self_learning import ExperienceMemory
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.simulation_mode = settings.SIMULATION_MODE
+    self.production_mode = settings.PRODUCTION_MODE
+    self.authorized = settings.AUTHORIZED_ENGAGEMENT
 class MissionController:
     """
     يتحكم في تدفق العمل بين الطبقات:

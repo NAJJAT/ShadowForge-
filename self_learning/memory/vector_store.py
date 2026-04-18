@@ -10,7 +10,11 @@ from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
+from core.config import settings
 
+
+def __init__(self):
+    self.persist_path = settings.VECTOR_STORE_PATH
 # محاولة استيراد ChromaDB (اختياري)
 try:
     import chromadb

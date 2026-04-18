@@ -10,11 +10,14 @@ from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, field
 from enum import Enum
 import json
+from core.config import settings
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.experience_level = settings.EXPERIENCE_LEVEL
+    self.risk_threshold = settings.RISK_THRESHOLD
 class RiskLevel(Enum):
     """مستويات المخاطر"""
     CRITICAL = "critical"      # خطر شديد - لا تنفذ

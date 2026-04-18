@@ -10,10 +10,15 @@ import requests
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from enum import Enum
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.llm_enabled = settings.LLM_ENABLED
+    self.model = settings.LLM_MODEL
+    self.ollama_url = settings.LLM_OLLAMA_URL
+    self.temperature = settings.LLM_TEMPERATURE
 class LLMModel(Enum):
     """نماذج LLM المدعومة"""
     LLAMA3 = "llama3"

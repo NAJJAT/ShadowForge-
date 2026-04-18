@@ -12,9 +12,12 @@ import logging
 from typing import Dict, List, Optional, Callable
 from dataclasses import dataclass, field
 from enum import Enum
+from core.config import settings
 
 logger = logging.getLogger(__name__)
-
+def __init__(self):
+    self.c2_url = settings.C2_SERVER_URL
+    self.enabled = settings.C2_ENABLED
 
 class BeaconMode(Enum):
     NORMAL = "normal"

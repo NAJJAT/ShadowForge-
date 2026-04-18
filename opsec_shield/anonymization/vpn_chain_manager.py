@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime
 import hashlib
+from core.config import settings
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)

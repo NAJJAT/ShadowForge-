@@ -1,14 +1,11 @@
 """
-Key Manager - إدارة المفاتيح التشفيرية
+Key Manager - إدارة المفاتيح التشفيرية (نسخة مبسطة باستخدام hashlib)
 """
 
 import os
 import base64
 import hashlib
 import logging
-from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +14,7 @@ class KeyManager:
     """
     يدير المفاتيح التشفيرية:
     - توليد مفاتيح عشوائية
-    - استخلاص مفاتيح من كلمة مرور
+    - استخلاص مفاتيح من كلمة مرور (باستخدام PBKDF2 من hashlib)
     - تدوير المفاتيح
     - تخزين آمن مؤقت
     """
@@ -30,24 +27,18 @@ class KeyManager:
         if master_password:
             self.master_key = self.derive_key(master_password, salt=b'fixed_salt_16bytes')
         
-        logger.info("KeyManager initialized")
+        logger.info("KeyManager initialized (using hashlib)")
     
     def generate_key(self, length: int = 32) -> bytes:
         """توليد مفتاح عشوائي"""
         return os.urandom(length)
     
     def derive_key(self, password: bytes, salt: bytes, iterations: int = 100000) -> bytes:
-        """استخلاص مفتاح من كلمة مرور"""
-        kdf = PBKDF2(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=salt,
-            iterations=iterations,
-        )
-        return kdf.derive(password)
+        """استخلاص مفتاح من كلمة مرور باستخدام hashlib.pbkdf2_hmac"""
+        return hashlib.pbkdf2_hmac('sha256', password, salt, iterations, dklen=32)
     
     def fernet_key(self) -> bytes:
-        """توليد مفتاح صالح لـ Fernet"""
+        """توليد مفتاح صالح لـ Fernet (base64 URL-safe)"""
         return base64.urlsafe_b64encode(os.urandom(32))
     
     def rotate_session_key(self) -> bytes:

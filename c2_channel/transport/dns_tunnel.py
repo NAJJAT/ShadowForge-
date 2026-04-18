@@ -15,10 +15,13 @@ import logging
 from typing import List, Optional, Tuple, Callable
 from dataclasses import dataclass
 from cryptography.fernet import Fernet
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.tunnel_domain = settings.DNS_TUNNEL_DOMAIN
+    self.dns_server = settings.DNS_SERVER
 @dataclass
 class DNSMessage:
     """رسالة عبر DNS"""

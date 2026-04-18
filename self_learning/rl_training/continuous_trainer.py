@@ -6,9 +6,14 @@ import logging
 from typing import List, Dict
 from .policy_network import PolicyNetwork
 from .reward_shaping import RewardShaping
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
+
+def __init__(self):
+    self.rl_enabled = settings.RL_ENABLED
+    self.buffer_size = settings.RL_REPLAY_BUFFER_SIZE
 class ContinuousTrainer:
     """يدرب الشبكة باستمرار على التجارب الجديدة"""
     

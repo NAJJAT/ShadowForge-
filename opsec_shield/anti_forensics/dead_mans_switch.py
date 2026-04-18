@@ -14,10 +14,14 @@ from typing import List, Optional, Callable
 from dataclasses import dataclass
 from datetime import datetime
 import hashlib
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.enabled = settings.DMS_ENABLED
+    self.inactivity_timeout = settings.DMS_INACTIVITY_TIMEOUT_HOURS * 3600
+    self.alert_channel = settings.DMS_ALERT_CHANNEL
 @dataclass
 class DetectionEvent:
     """حدث اكتشاف خطر"""

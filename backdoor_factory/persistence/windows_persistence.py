@@ -14,9 +14,12 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field
 from enum import Enum
 import subprocess
+from core.config import settings
 
 logger = logging.getLogger(__name__)
-
+def __init__(self):
+    self.hide_from_user = settings.PERSISTENCE_HIDE_FROM_USER
+    self.use_legitimate_names = settings.PERSISTENCE_USE_LEGITIMATE_NAMES
 
 class PersistenceMethod(Enum):
     """طرق الاستمرارية المدعومة"""

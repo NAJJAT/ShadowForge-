@@ -13,10 +13,15 @@ import logging
 from typing import Dict, List, Optional, Callable
 from dataclasses import dataclass, field
 from enum import Enum
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.beacon_interval = settings.IMPLANT_BEACON_INTERVAL
+    self.jitter = settings.IMPLANT_JITTER
+    self.fileless = settings.IMPLANT_FILELESS
+    
 class ImplantState(Enum):
     SLEEPING = "sleeping"
     ACTIVE = "active"

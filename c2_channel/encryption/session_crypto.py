@@ -7,10 +7,12 @@ import base64
 import hashlib
 import logging
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives import hashes
 
+# ثم في الكود استخدم PBKDF2HMAC
 logger = logging.getLogger(__name__)
 
 

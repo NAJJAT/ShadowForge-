@@ -12,10 +12,15 @@ import logging
 from typing import Optional, List, Tuple
 from dataclasses import dataclass
 from pathlib import Path
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.tor_enabled = settings.TOR_ENABLED
+    self.socks_port = settings.TOR_SOCKS_PORT
+    self.control_port = settings.TOR_CONTROL_PORT
+    self.use_bridges = settings.TOR_USE_BRIDGES
 @dataclass
 class TorStatus:
     """حالة اتصال Tor"""

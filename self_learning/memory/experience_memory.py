@@ -11,10 +11,12 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-
+def __init__(self):
+    self.db_path = settings.EXPERIENCE_DB_PATH
 class ExperienceOutcome(Enum):
     SUCCESS = "success"
     FAILURE = "failure"
