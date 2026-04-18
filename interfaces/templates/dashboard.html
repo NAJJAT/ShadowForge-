@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RedTeam AI Dashboard</title>
+    <style>
+        body { font-family: monospace; background: #0a0e27; color: #00ffcc; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .card { background: #1a1f3a; border-radius: 8px; padding: 15px; margin: 10px 0; }
+        input, button { background: #2a2f4a; border: none; padding: 8px; color: #00ffcc; }
+        button { cursor: pointer; }
+        .vuln-critical { color: #ff4444; }
+        .vuln-high { color: #ff8844; }
+        .vuln-medium { color: #ffcc44; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ RedTeam AI Dashboard</h1>
+        
+        <div class="card">
+            <h3>🔍 Vulnerability Scanner</h3>
+            <input type="text" id="targetUrl" placeholder="https://target.com/page.php?id=1" size="50">
+            <button onclick="startScan()">Start Scan</button>
+            <div id="scanResults"></div>
+        </div>
+        
+        <div class="card">
+            <h3>📊 System Status</h3>
+            <div id="status">
+                VPN: <span id="vpnStatus">🔴 Disconnected</span><br>
+                Tor: <span id="torStatus">🔴 Stopped</span><br>
+                Memory: <span id="memoryCount">0</span> experiences
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        async function startScan() {
+            const url = document.getElementById('targetUrl').value;
+            const resultsDiv = document.getElementById('scanResults');
+            resultsDiv.innerHTML = 'Scanning...';
+            
+            const response = await fetch('/api/scan', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({url: url})
+            });
+            const vulns = await response.json();
+            
+            resultsDiv.innerHTML = vulns.map(v => 
+                `<div class="vuln-${v.severity}">⚠️ ${v.name} (${v.severity}) - ${v.description}</div>`
+            ).join('');
+        }
+        
+        // تحديث الحالة كل 5 ثوان
+        setInterval(async () => {
+            const res = await fetch('/api/status');
+            const status = await res.json();
+            document.getElementById('vpnStatus').innerHTML = status.vpn ? '🟢 Connected' : '🔴 Disconnected';
+            document.getElementById('torStatus').innerHTML = status.tor ? '🟢 Running' : '🔴 Stopped';
+            document.getElementById('memoryCount').innerText = status.memory_count;
+        }, 5000);
+    </script>
+</body>
+</html>
